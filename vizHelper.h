@@ -30,7 +30,13 @@ void sim_msg_handler(int sockfd, int *check)
         	if((numbytes = recv(sockfd, buffer, msgsize, 0)) == -1) 
           	  perror("\nRecv failed\n");
                 printf("\nDEBUG: %d Received [%s]\n", mpiPi.rank, buffer);
-                if (*check) {
+                
+                tokenize(buffer, marker, last);
+/*
+                printf("\nDEBUG: %d Received [%s] [%s]\n", mpiPi.rank, buffer, last);
+		printf("\nDEBUG: %d numbytes = %d\n", mpiPi.rank, numbytes);
+*/
+	  	if (*check && strncmp(buffer, "Byebye", 6) != 0) {
                   if((numbytes = send(sockfd, "End", 4, 0)) <= 0)
 			perror("Client send error");
                 }
@@ -38,12 +44,7 @@ void sim_msg_handler(int sockfd, int *check)
                   if((numbytes = send(sockfd, "NotEnd", 7, 0)) <= 0)
 			perror("Client send error");      
                 }
-                tokenize(buffer, marker, last);
-/*
-                printf("\nDEBUG: %d Received [%s] [%s]\n", mpiPi.rank, buffer, last);
-		printf("\nDEBUG: %d numbytes = %d\n", mpiPi.rank, numbytes);
-*/
-	  	if(strncmp(buffer, "Byebye", 6) == 0) 
+                if(strncmp(buffer, "Byebye", 6) == 0) 
 		  break;
 	}
 //	close(sockfd);

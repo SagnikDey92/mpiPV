@@ -126,22 +126,24 @@ int main(int argc, char **argv)
 	  for (iter=0;iter<numps;iter++) {
 
 		sleep(5);
-		printf("\nSending %s to %d\n", "Hello", visItsockfd[iter]);
+		
 		strcpy(buffer, "Hello");
 		if (flag1) {
 		  strcpy(buffer, "Byebye");
 		  flag2 = 1;
-		}	
+		}
+		printf("\nSending %s to %d\n", buffer, iter);	
 		int len = strlen(buffer);
 		//if((numbytes = write(visItsockfd[iter], buffer, len+1)) <= 0)
 		if((numbytes = send(visItsockfd[iter], buffer, len+1, 0)) <= 0)
 			perror("Server send error");
 		printf("\nSent %d %d bytes\n", len, numbytes);
-		if((numbytes = recv(visItsockfd[iter], buffer, msgsize, 0)) == -1) 
+		if(flag1 && (numbytes = recv(visItsockfd[iter], buffer, msgsize, 0)) == -1) 
           	  perror("\nRecv failed\n");
 		if(strncmp(buffer, "End", 3) == 0) {
-		  printf("Received End\n"); 
+		  printf("Received End from %d\n", iter);
 		  flag1 = 1;
+		  break;
 		}
 	  }
 	  if (flag2)
