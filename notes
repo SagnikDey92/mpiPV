@@ -1,0 +1,108 @@
+install libunwind-1.1 from http://download.savannah.gnu.org/releases/libunwind/
+install binutils-2.26 (latest) from ftp://ftp.gnu.org/gnu/binutils/
+
+==============================================================================================================================================
+
+binutils
+ ./configure --prefix=/work/bin/binutils --enable-install-libiberty
+ make
+ make install
+
+==============================================================================================================================================
+
+libunwind
+ ./configure --prefix=/work/bin/libunwind
+ make
+ make install
+
+==============================================================================================================================================
+
+mpiP
+
+ make clean
+ export F77=/usr/bin/gfortran
+ export CPPFLAGS="-I. -I/work/bin/libunwind/include -I/work/bin/binutils/include -I/work/bin/mpich-3.1.4-install/include"
+ export LDFLAGS="-L/work/bin/libunwind/lib -lunwind -L/work/bin/binutils/lib -lbfd -liberty -L/work/bin/mpich-3.1.4-install/lib"
+ ./configure --with-binutils-dir=/work/bin/binutils --with-libunwind=/work/bin/libunwind --prefix=/work/bin/mpiPviz 
+ cd mpiPconfig.h -> #define PACKAGE mpiPpkg (otherwise "config.h not found error")
+ make
+
+==============================================================================================================================================
+
+FLASH
+
+change in Makefile.h
+add lmpiP
+make
+
+==============================================================================================================================================
+
+
+CoMD
+
+Edit parallel.c in src-mpi
+Modify MPI_Init to MPI_Init_thread(argc, argv, MPI_THREAD_MULTIPLE, &provided);
+
+
+Edit to add
+OTHER_LIB = -L/work/RA/mpiP-3.4.1 -lmpiP -L/work/bin/libunwind/lib -lunwind -L/work/bin/binutils/lib -lbfd -ldl -lz -liberty -lpthread -lm
+
+make clean ; make
+
+
+==============================================================================================================================================
+
+
+
+HOW TO RUN
+----------
+
+rundir> ./server 4
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/work/bin/hdf5/lib:/work/bin/libunwind/lib
+rundir> mpirun -n 4 -f hostfile ./flash4
+
+
+
+changes in flash
+useopenmp = 1
+changed mpi_init_thread - mpi_thread_multiple
+
+
+
+## run comd
+
+rundir> ./server 4
+rundir> mpirun -n 4 -f hostfile ./CoMD-mpi --xproc 2 --yproc 2 --zproc 1 --nx 30 --ny 30 --nz 30 > outcomd
+
+
+
+
+==============================================================================================================================================
+
+NAS PB
+
+3.3.1
+
+Edit config/make.def (copied from make.def.template)
+change mpi libs and add mpiP
+OTHER_LIB = -L/work/RA/mpiP-3.4.1 -lmpiP -L/work/bin/libunwind/lib -lunwind -L/work/bin/binutils/lib -lbfd -ldl -lz -liberty -lpthread -lm
+
+compile --> 
+make sp NPROCS=4 CLASS=A
+
+change mpi_init_thread in source
+SP ran
+
+
+make lu NPROCS=4 CLASS=A
+
+From rundir
+
+terminal 1:
+./server 4
+
+terminal 2:
+mpirun -n 4 -f hostfile ./lu.C.4 > outlu
+
+
