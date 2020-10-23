@@ -42,7 +42,7 @@
 #include "mpip_timers.h"
 
 #define MPIPI_HOSTNAME_LEN_MAX 128
-#define MPIP_CALLSITE_STACK_DEPTH_MAX 15
+#define MPIP_CALLSITE_STACK_DEPTH_MAX 8
 
 #define MPIP_HELP_LIST "mpip-help@lists.sourceforge.net"
 

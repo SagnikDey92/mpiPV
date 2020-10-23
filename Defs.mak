@@ -28,10 +28,10 @@ INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_DATA = ${INSTALL} -m 644
 
-LIBS          = -lm -L/home/sagnik/Downloads/Software/binutils/lib -ldl -lbfd  -lz -liberty -lunwind
-LDFLAGS       = -L/home/sagnik/Downloads/Software/libunwind/lib -lunwind -L/home/sagnik/Downloads/Software/binutils/lib -lbfd -liberty -L/home/sagnik/Downloads/Software/mpich-install/lib
+LIBS          = -ldl -lm -L/work/bin/binutils/lib  -lbfd  -lz -liberty -lunwind
+LDFLAGS       = -L/work/bin/libunwind/lib -lunwind -L/work/bin/binutils/lib -lbfd -liberty -L/work/bin/mpich-3.1.4-install/lib
 F77_SYMBOLS   = symbol_
-BINUTILS_DIR  = /home/sagnik/Downloads/Software/binutils
+BINUTILS_DIR  = /work/bin/binutils
 BIN_TYPE_FLAG = 
 
 CANONICAL_BUILD     = x86_64-unknown-linux-gnu
@@ -43,7 +43,7 @@ TARGET_CPU          = x86_64
 ifneq ( $(srcdir), "." )
 CPPFLAGS   += -I.
 endif
-CPPFLAGS    = -I$(srcdir) -I. -I/home/sagnik/Downloads/Software/libunwind/include -I/home/sagnik/Downloads/Software/binutils/include -I/home/sagnik/Downloads/Software/binutils/include/libiberty -I/home/sagnik/Downloads/Software/mpich-install/include -I/home/sagnik/Downloads/Software/binutils/include
+CPPFLAGS    = -I$(srcdir) -I. -I/work/bin/libunwind/include -I/work/bin/binutils/include -I/work/bin/mpich-3.1.4-install/include -I/work/bin/binutils/include
 
 # check if we're *really* cross-compiling
 ifeq (${CANONICAL_TARGET},${CANONICAL_BUILD})
@@ -107,7 +107,7 @@ F77_VENDOR     = GNU
 endif
 
 DEMANGLE_TARGET =
-DO_DEMANGLE = GNU
+DO_DEMANGLE = false
 ENABLE_BFD = yes
 MPIPCXXLIB  = mpiP
 

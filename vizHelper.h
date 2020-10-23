@@ -15,7 +15,7 @@ void tokenize(char *input, const char *marker, char *returnstr) {
 }
 
 
-void sim_msg_handler(int sockfd, int *check)
+void sim_msg_handler(int sockfd)
 {
       	int i=0, numbytes;
         char *buffer = (char *)malloc(msgsize*sizeof(char));
@@ -30,28 +30,19 @@ void sim_msg_handler(int sockfd, int *check)
         	if((numbytes = recv(sockfd, buffer, msgsize, 0)) == -1) 
           	  perror("\nRecv failed\n");
                 printf("\nDEBUG: %d Received [%s]\n", mpiPi.rank, buffer);
-                
                 tokenize(buffer, marker, last);
 /*
                 printf("\nDEBUG: %d Received [%s] [%s]\n", mpiPi.rank, buffer, last);
 		printf("\nDEBUG: %d numbytes = %d\n", mpiPi.rank, numbytes);
 */
-	  	if (*check && strncmp(buffer, "Byebye", 6) != 0) {
-                  if((numbytes = send(sockfd, "End", 4, 0)) <= 0)
-			perror("Client send error");
-                }
-                else {
-                  if((numbytes = send(sockfd, "NotEnd", 7, 0)) <= 0)
-			perror("Client send error");      
-                }
-                if(strncmp(buffer, "Byebye", 6) == 0) 
+	  	if(strncmp(buffer, "Byebye", 6) == 0) 
 		  break;
 	}
 //	close(sockfd);
 }
 
 void * initConn(void *arg) {
-        int *check = (int*) arg;
+
 	int i=0, flags;
         char *buffer = (char *)malloc(msgsize*sizeof(char));
 	struct sigaction saio; 
@@ -100,7 +91,7 @@ void * initConn(void *arg) {
 	//flags = fcntl(sockfd, F_GETFL);
 	//fcntl(sockfd, F_SETFL, flags | O_ASYNC | O_RDWR | O_NONBLOCK); // | FASYNC);
 
-	sim_msg_handler(sockfd, check);
+	sim_msg_handler(sockfd);
 
 }
 
