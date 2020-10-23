@@ -12,7 +12,6 @@
 
 FILE *dbg;
 int sockfd, visItsockfd[1024], address_len;
-int msgsize = 2048;
 socklen_t visIt_address_len;
 struct sockaddr_in address, visIt_address;
 char buf[512], visbuf[512];
@@ -117,7 +116,8 @@ int main(int argc, char **argv)
 */
 		//sleep(180);
 
-	int i=-1, numbytes, flag1 = 0, flag2 = 0;
+	const char *string[] = {"Hello", "I will", "send", "now", "Byebye"};
+	int i=-1, numbytes;
 
 	while(1) {
 	 
@@ -126,29 +126,22 @@ int main(int argc, char **argv)
 	  for (iter=0;iter<numps;iter++) {
 
 		sleep(5);
-		
-		strcpy(buffer, "Hello");
-		if (flag1) {
-		  strcpy(buffer, "Byebye");
-		  flag2 = 1;
-		}
-		printf("\nSending %s to %d\n", buffer, iter);	
+		printf("\nSending %s to %d\n", string[i], visItsockfd[iter]);
+		strcpy(buffer, string[i]);
 		int len = strlen(buffer);
+		buffer[len]='%';	//\n';
 		//if((numbytes = write(visItsockfd[iter], buffer, len+1)) <= 0)
 		if((numbytes = send(visItsockfd[iter], buffer, len+1, 0)) <= 0)
 			perror("Server send error");
+		
 		printf("\nSent %d %d bytes\n", len, numbytes);
-		if(flag1 && (numbytes = recv(visItsockfd[iter], buffer, msgsize, 0)) == -1) 
-          	  perror("\nRecv failed\n");
-		if(strncmp(buffer, "End", 3) == 0) {
-		  printf("Received End from %d\n", iter);
-		  flag1 = 1;
-		  break;
-		}
+
 	  }
-	  if (flag2)
-		break;
+
 	  sleep(wait);
+
+	  if(strncmp(buffer, "Byebye", 6) == 0) 
+		  break;
 	}
 
 	// Close connection
