@@ -1,4 +1,5 @@
 import csv
+import sys
 
 MPI_Time = []
 Aggregate_Time = []
@@ -6,7 +7,18 @@ Aggregate_Sent_Message_Size = []
 Aggregate_Collective_Time = []
 Aggregate_Point_To_Point = []
 
-with open('miniAMR.x.16.6152.1.mpiP', 'r') as in_file:
+from os import walk
+
+f = []
+for (dirpath, dirnames, filenames) in walk(sys.argv[1]):
+    f.extend(filenames)
+    break
+
+f.remove("report2csv.py")
+latest_report = max(f)
+print(latest_report)
+
+with open(latest_report, 'r') as in_file:
     lines = in_file.read().splitlines()
     n = len(lines)
     #MPI Time (seconds)
