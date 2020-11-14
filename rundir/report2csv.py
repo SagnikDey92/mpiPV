@@ -14,6 +14,8 @@ f = []
 for (dirpath, dirnames, filenames) in walk(pwd):
     f.extend(filenames)
     break
+temp = [item for item in f if item.split('.')[-1] == "mpiP"]
+f = temp
 
 latest_report = max(f)
 print(latest_report)
@@ -25,6 +27,11 @@ with open(pwd+latest_report, 'r') as in_file:
     start = 0
     end = 0
     found = 0
+    endtime = ""
+    for i in range(n):
+        if (lines[i].find("@ Stop time")!=-1):
+            endtime = lines[i].split(' ')[-1]
+            break
     for i in range(n):
         if (lines[i].find("---------------------------------------------------------------------------")!=-1):
             end = i
@@ -41,7 +48,7 @@ with open(pwd+latest_report, 'r') as in_file:
         line = lines[i]
         MPI_Time.append(line.split("\t"))
 
-    with open(pwd+'MPI_Time.csv', 'w') as out_file:
+    with open(pwd+'MPI_Time_'+endtime+'.csv', 'w') as out_file:
         writer = csv.writer(out_file)
         writer.writerows(MPI_Time)
     
@@ -65,7 +72,7 @@ with open(pwd+latest_report, 'r') as in_file:
         line = lines[i]
         Aggregate_Time.append(line.split("\t"))
 
-    with open(pwd+'Aggregate_Time.csv', 'w') as out_file:
+    with open(pwd+'Aggregate_Time_'+endtime+'.csv', 'w') as out_file:
         writer = csv.writer(out_file)
         writer.writerows(Aggregate_Time)
 
@@ -89,7 +96,7 @@ with open(pwd+latest_report, 'r') as in_file:
         line = lines[i]
         Aggregate_Sent_Message_Size.append(line.split("\t"))
 
-    with open(pwd+'Aggregate_Sent_Message_Size.csv', 'w') as out_file:
+    with open(pwd+'Aggregate_Sent_Message_Size_'+endtime+'.csv', 'w') as out_file:
         writer = csv.writer(out_file)
         writer.writerows(Aggregate_Sent_Message_Size)
     
@@ -113,7 +120,7 @@ with open(pwd+latest_report, 'r') as in_file:
         line = lines[i]
         Aggregate_Collective_Time.append(line.split("\t"))
 
-    with open(pwd+'Aggregate_Collective_Time.csv', 'w') as out_file:
+    with open(pwd+'Aggregate_Collective_Time_'+endtime+'.csv', 'w') as out_file:
         writer = csv.writer(out_file)
         writer.writerows(Aggregate_Collective_Time)
     
@@ -137,6 +144,6 @@ with open(pwd+latest_report, 'r') as in_file:
         line = lines[i]
         Aggregate_Point_To_Point.append(line.split("\t"))
 
-    with open(pwd+'Aggregate_Point_To_Point.csv', 'w') as out_file:
+    with open(pwd+'Aggregate_Point_To_Point_'+endtime+'.csv', 'w') as out_file:
         writer = csv.writer(out_file)
         writer.writerows(Aggregate_Point_To_Point)
