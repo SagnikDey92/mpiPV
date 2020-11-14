@@ -26,6 +26,8 @@ static char *svnid = "$Id: mpiPi.c 498 2013-07-18 22:12:41Z chcham $";
 #include <sys/types.h>
 #include "vizconn.h"
 
+int check = 0;
+
 static int
 mpiPi_callsite_stats_pc_hashkey (const void *p)
 {
@@ -245,7 +247,7 @@ mpiPi_init (char *appName)
     }
 
 /*vizProf*/
-  if(pthread_create(&thr, NULL, &initConn, NULL))
+  if(pthread_create(&thr, NULL, &initConn, (void*)&check))
         perror("Could not create thread ");
   else
         printf("thread created for %d mpiPi.enabled %d\n", mpiPi.rank, mpiPi.enabled);
@@ -1178,6 +1180,7 @@ mpiPi_finalize ()
    */
 
 /*vizProf*/
+  check = 1;
   if(pthread_join(thr, NULL)) {
         printf("Could not join thread\n");
         exit(1);
