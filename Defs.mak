@@ -5,7 +5,7 @@
 
 SHELL	= /bin/sh
 CC	= mpicc
-CXX	= mpicxx
+CXX	= mpiCC
 FC	= /usr/bin/gfortran
 AR	= ar
 RANLIB	= ranlib
@@ -28,10 +28,10 @@ INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_DATA = ${INSTALL} -m 644
 
-LIBS          = -lm -L/home/sagnik/Downloads/Software/binutils/lib -ldl -lbfd  -lz -liberty -lunwind
-LDFLAGS       = -L/home/sagnik/Downloads/Software/libunwind/lib -lunwind -L/home/sagnik/Downloads/Software/binutils/lib -lbfd -liberty -L/home/sagnik/Downloads/Software/mpich-install/lib
+LIBS          = -lm -L/users/misc/sagnikd/Libraries/binutils/lib -ldl -lbfd  -lz -liberty -lunwind
+LDFLAGS       = -L/users/misc/sagnikd/Libraries/libunwind/lib -lunwind -L/users/misc/sagnikd/Libraries/binutils/lib -lbfd -liberty -L/users/misc/sagnikd/Libraries/mpich-install/lib
 F77_SYMBOLS   = symbol_
-BINUTILS_DIR  = /home/sagnik/Downloads/Software/binutils
+BINUTILS_DIR  = /users/misc/sagnikd/Libraries/binutils
 BIN_TYPE_FLAG = 
 
 CANONICAL_BUILD     = x86_64-unknown-linux-gnu
@@ -43,7 +43,7 @@ TARGET_CPU          = x86_64
 ifneq ( $(srcdir), "." )
 CPPFLAGS   += -I.
 endif
-CPPFLAGS    = -I$(srcdir) -I. -I/home/sagnik/Downloads/Software/libunwind/include -I/home/sagnik/Downloads/Software/binutils/include -I/home/sagnik/Downloads/Software/binutils/include/libiberty -I/home/sagnik/Downloads/Software/mpich-install/include -I/home/sagnik/Downloads/Software/binutils/include
+CPPFLAGS    = -I$(srcdir) -I. -I/users/misc/sagnikd/Libraries/libunwind/include -I/users/misc/sagnikd/Libraries/binutils/include -I/users/misc/sagnikd/Libraries/binutils/include/libiberty -I/users/misc/sagnikd/Libraries/mpich-install/include -I/users/misc/sagnikd/Libraries/binutils/include
 
 # check if we're *really* cross-compiling
 ifeq (${CANONICAL_TARGET},${CANONICAL_BUILD})

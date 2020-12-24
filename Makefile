@@ -4,7 +4,7 @@
 # $Id: Makefile.in 498 2013-07-18 22:12:41Z chcham $
 
 srcdir=.
-prefix=/home/sagnik/Downloads/Software/mpiPV
+prefix=/users/misc/sagnikd/Libraries/mpiPV
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
@@ -12,7 +12,7 @@ slibdir=${exec_prefix}/lib
 bindir=${exec_prefix}/bin
 datarootdir=${prefix}/share
 datadir=${datarootdir}
-libunwind_loc=/home/sagnik/Downloads/Software/libunwind
+libunwind_loc=/users/misc/sagnikd/Libraries/libunwind
 
 
 PACKAGE_TARNAME=mpip
