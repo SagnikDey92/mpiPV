@@ -28,7 +28,6 @@ uname -v = #124-Ubuntu SMP Thu Oct 15 13:03:05 UTC 2020
 /bin/universe          = unknown
 
 PATH: /users/misc/sagnikd/Libraries/mpich-install/bin
-PATH: /users/misc/sagnikd/Libraries/mpich-install/bin
 PATH: /usr/local/sbin
 PATH: /usr/local/bin
 PATH: /usr/sbin
@@ -351,7 +350,7 @@ configure:4944: checking for demangle.h
 configure:4944: result: yes
 configure:5059: checking for MPIR_ToPointer in -lmpi
 configure:5084: mpicc -o conftest -g -O2 -I. -I/users/misc/sagnikd/Libraries/libunwind/include -I/users/misc/sagnikd/Libraries/binutils/include -I/users/misc/sagnikd/Libraries/binutils/include/libiberty -I/users/misc/sagnikd/Libraries/mpich-install/include -I/users/misc/sagnikd/Libraries/binutils/include -L/users/misc/sagnikd/Libraries/libunwind/lib -lunwind -L/users/misc/sagnikd/Libraries/binutils/lib -lbfd -liberty -L/users/misc/sagnikd/Libraries/mpich-install/lib conftest.c -lmpi  -lm -L/users/misc/sagnikd/Libraries/binutils/lib -ldl -lbfd  -lz -liberty >&5
-/tmp/cct4c6Oo.o: In function `main':
+/tmp/cc00KF0W.o: In function `main':
 /users/misc/sagnikd/Libraries/mpiPViz/conftest.c:35: undefined reference to `MPIR_ToPointer'
 collect2: error: ld returned 1 exit status
 configure:5084: $? = 1
@@ -397,7 +396,7 @@ configure: failed program was:
 configure:5093: result: no
 configure:5100: checking for MPIR_ToPointer in -lmpich
 configure:5125: mpicc -o conftest -g -O2 -I. -I/users/misc/sagnikd/Libraries/libunwind/include -I/users/misc/sagnikd/Libraries/binutils/include -I/users/misc/sagnikd/Libraries/binutils/include/libiberty -I/users/misc/sagnikd/Libraries/mpich-install/include -I/users/misc/sagnikd/Libraries/binutils/include -L/users/misc/sagnikd/Libraries/libunwind/lib -lunwind -L/users/misc/sagnikd/Libraries/binutils/lib -lbfd -liberty -L/users/misc/sagnikd/Libraries/mpich-install/lib conftest.c -lmpich  -lm -L/users/misc/sagnikd/Libraries/binutils/lib -ldl -lbfd  -lz -liberty >&5
-/tmp/ccNde2Nt.o: In function `main':
+/tmp/ccwbT9w8.o: In function `main':
 /users/misc/sagnikd/Libraries/mpiPViz/conftest.c:35: undefined reference to `MPIR_ToPointer'
 collect2: error: ld returned 1 exit status
 configure:5125: $? = 1
@@ -445,7 +444,7 @@ configure:5159: mpicc -c -g -O2 -I. -I/users/misc/sagnikd/Libraries/libunwind/in
 configure:5159: $? = 0
 configure:5176: checking for rts_get_timebase
 configure:5176: mpicc -o conftest -g -O2 -I. -I/users/misc/sagnikd/Libraries/libunwind/include -I/users/misc/sagnikd/Libraries/binutils/include -I/users/misc/sagnikd/Libraries/binutils/include/libiberty -I/users/misc/sagnikd/Libraries/mpich-install/include -I/users/misc/sagnikd/Libraries/binutils/include -L/users/misc/sagnikd/Libraries/libunwind/lib -lunwind -L/users/misc/sagnikd/Libraries/binutils/lib -lbfd -liberty -L/users/misc/sagnikd/Libraries/mpich-install/lib conftest.c -lm -L/users/misc/sagnikd/Libraries/binutils/lib -ldl -lbfd  -lz -liberty >&5
-/tmp/cc1J82mG.o: In function `main':
+/tmp/ccDBku0j.o: In function `main':
 /users/misc/sagnikd/Libraries/mpiPViz/conftest.c:59: undefined reference to `rts_get_timebase'
 collect2: error: ld returned 1 exit status
 configure:5176: $? = 1
@@ -564,7 +563,7 @@ configure: failed program was:
 configure:5189: result: no
 configure:5203: checking for mread_real_time
 configure:5203: mpicc -o conftest -g -O2 -I. -I/users/misc/sagnikd/Libraries/libunwind/include -I/users/misc/sagnikd/Libraries/binutils/include -I/users/misc/sagnikd/Libraries/binutils/include/libiberty -I/users/misc/sagnikd/Libraries/mpich-install/include -I/users/misc/sagnikd/Libraries/binutils/include -L/users/misc/sagnikd/Libraries/libunwind/lib -lunwind -L/users/misc/sagnikd/Libraries/binutils/lib -lbfd -liberty -L/users/misc/sagnikd/Libraries/mpich-install/lib conftest.c -lm -L/users/misc/sagnikd/Libraries/binutils/lib -ldl -lbfd  -lz -liberty >&5
-/tmp/ccOmNNOT.o: In function `main':
+/tmp/ccHRhq7C.o: In function `main':
 /users/misc/sagnikd/Libraries/mpiPViz/conftest.c:59: undefined reference to `mread_real_time'
 collect2: error: ld returned 1 exit status
 configure:5203: $? = 1
@@ -634,7 +633,7 @@ configure: failed program was:
 configure:5203: result: no
 configure:5220: checking for read_real_time
 configure:5220: mpicc -o conftest -g -O2 -I. -I/users/misc/sagnikd/Libraries/libunwind/include -I/users/misc/sagnikd/Libraries/binutils/include -I/users/misc/sagnikd/Libraries/binutils/include/libiberty -I/users/misc/sagnikd/Libraries/mpich-install/include -I/users/misc/sagnikd/Libraries/binutils/include -L/users/misc/sagnikd/Libraries/libunwind/lib -lunwind -L/users/misc/sagnikd/Libraries/binutils/lib -lbfd -liberty -L/users/misc/sagnikd/Libraries/mpich-install/lib conftest.c -lm -L/users/misc/sagnikd/Libraries/binutils/lib -ldl -lbfd  -lz -liberty >&5
-/tmp/ccmef4yX.o: In function `main':
+/tmp/cc5y8HAR.o: In function `main':
 /users/misc/sagnikd/Libraries/mpiPViz/conftest.c:59: undefined reference to `read_real_time'
 collect2: error: ld returned 1 exit status
 configure:5220: $? = 1
