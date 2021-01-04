@@ -27,6 +27,7 @@ void sim_msg_handler(int sockfd)
 		sleep (1);
 		//printf("\nDEBUG: %d rank %d tag %d local collector %d\n", i, mpiPi.rank, mpiPi.tag, mpiPi.collectorRank);
     		mpiPi_generateReport (mpiPi.report_style);
+		MPI_Pcontrol(2);
         	if((numbytes = recv(sockfd, buffer, msgsize, 0)) == -1) 
           	  perror("\nRecv failed\n");
                 printf("\nDEBUG: %d Received [%s]\n", mpiPi.rank, buffer);

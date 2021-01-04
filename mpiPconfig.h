@@ -17,14 +17,15 @@
 #define _MPIPCONFIG_H
 
 /* Define if demangle.h is present. */
-/* #undef HAVE_DEMANGLE_H */
+#define HAVE_DEMANGLE_H 1
+
+#define PACKAGE mpiPpkg
 
 /* Define if using libdwarf for source lookup */
 /* #undef USE_LIBDWARF */
 
 /* Define if using binutils libbfd */
 #define ENABLE_BFD 1
-#define PACKAGE mpiPpkg
 
 /* Define if using libunwind */
 #define HAVE_LIBUNWIND 1

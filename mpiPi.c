@@ -145,7 +145,10 @@ mpiPi_init (char *appName)
     }
 
   mpiPi.toolname = "mpiP";
-  mpiPi.comm = MPI_COMM_WORLD;
+  //mpiPi.comm = MPI_COMM_WORLD;
+  MPI_Comm dupcomm;
+  MPI_Comm_dup(MPI_COMM_WORLD, &dupcomm);
+  mpiPi.comm = dupcomm;
   mpiPi.tag = 9821;
   mpiPi.procID = getpid ();
   mpiPi.appName = strdup (appName);
