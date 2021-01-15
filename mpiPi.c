@@ -1181,11 +1181,14 @@ mpiPi_finalize ()
    */
 
 /*vizProf*/
-  if(pthread_join(thr, NULL)) {
-        printf("Could not join thread\n");
-        exit(1);
+  if(pthread_cancel(thr)) {
+      printf("Could not cancel thread\n");
+      exit(1);
   }
-
+  if(pthread_join(thr, NULL)) {
+      printf("Could not join thread\n");
+      exit(1);
+  }
   return;
 }
 

@@ -28,8 +28,24 @@ void sim_msg_handler(int sockfd)
 		//printf("\nDEBUG: %d rank %d tag %d local collector %d\n", i, mpiPi.rank, mpiPi.tag, mpiPi.collectorRank);
     		mpiPi_generateReport (mpiPi.report_style);
 		MPI_Pcontrol(2);
-        	if((numbytes = recv(sockfd, buffer, msgsize, 0)) == -1) 
-          	  perror("\nRecv failed\n");
+                int number = 123;
+                if (mpiPi.rank == mpiPi.collectorRank) {
+                  if((numbytes = recv(sockfd, buffer, msgsize, 0)) == -1) 
+          	    perror("\nRecv failed\n");              
+                  MPI_Send(&number, 1, MPI_INT, 1, 0, mpiPi.comm);
+                }  
+                else
+                  MPI_Recv(&number, 1, MPI_INT, 0, 0, mpiPi.comm, MPI_STATUS_IGNORE);
+                      
+                // if (world_rank == 0) {
+                //         number = -1;
+                //         MPI_Send(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
+                //         } else if (world_rank == 1) {
+                //         MPI_Recv(&number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD,
+                //                 MPI_STATUS_IGNORE);
+                //         printf("Process 1 received number %d from process 0\n",
+                //                 number);
+                //         }
                 printf("\nDEBUG: %d Received [%s]\n", mpiPi.rank, buffer);
                 tokenize(buffer, marker, last);
 /*
@@ -53,7 +69,8 @@ void * initConn(void *arg) {
 
 //	int * rank = (int *)arg;
 //	printf("\ninitConn called %d\n", *rank);
-
+        if (mpiPi.rank == mpiPi.collectorRank)
+        {
 	if ((hostname = gethostbyname(serverIP)) == 0) {
                 perror("client: gethostbyname error ");
                 exit(1);
@@ -87,7 +104,7 @@ void * initConn(void *arg) {
                 perror("client: connect error ");
                 exit(1);
         }
-
+        }
 	//fcntl(sockfd, F_SETOWN, getpid());
 	//flags = fcntl(sockfd, F_GETFL);
 	//fcntl(sockfd, F_SETFL, flags | O_ASYNC | O_RDWR | O_NONBLOCK); // | FASYNC);

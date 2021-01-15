@@ -55,6 +55,8 @@ int main(int argc, char **argv)
 	int numps = atoi(argv[1]);
 	int wait = atoi(argv[2]);
 
+	numps = 1;
+
 	// Create an endpoint for communication
 
 	if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
