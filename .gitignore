@@ -1,0 +1,7 @@
+*.log
+libmpiP.a
+lookup.c
+mpiPi_def.h
+symbols.h
+wrappers.c
+*.o
