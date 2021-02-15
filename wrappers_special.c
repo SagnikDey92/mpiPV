@@ -30,12 +30,12 @@ static int
 _MPI_Init (int *argc, char ***argv)
 {
   int rc = 0;
-  int enabledStatus;
+  int enabledStatus, provided;
 
   enabledStatus = mpiPi.enabled;
   mpiPi.enabled = 0;
 
-  rc = PMPI_Init (argc, argv);
+  rc = PMPI_Init_thread (argc, argv, MPI_THREAD_MULTIPLE, &provided);
 
   mpiPi.enabled = enabledStatus;
 

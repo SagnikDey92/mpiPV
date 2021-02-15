@@ -24,7 +24,7 @@ struct sockaddr_in server_address, client_address;
 void *initConn(void *); //void initConn();
 void handler(int);
 
-char *serverIP = "172.27.19.2";	//10.192.13.35";
+char *serverIP = "172.27.19.2";	//127.0.0.1;
 
 struct sigevent sigevent = {0};        // For notification
 mqd_t rmsgq_id;

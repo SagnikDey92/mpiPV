@@ -5,3 +5,4 @@ mpiPi_def.h
 symbols.h
 wrappers.c
 *.o
+.vscode*
